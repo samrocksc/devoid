@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mysql56:
+    image: mysql:5.6
+    restart: unless-stopped
+    container_name: mysql
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - docker-mysql:/var/lib/mysql
+    environment:
+      MYSQL_USER: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'devoid'
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_USER: 'root'
+      POSTGRES_DB: 'devoid'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+    volumes:
+      - docker-postgres:/var/lib/postgres
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  docker-mysql:
+  docker-postgres:
