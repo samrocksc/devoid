@@ -1,7 +1,6 @@
 pub mod decompose {
     use std::process::Command;
     pub fn run_image(image_name: String) {
-        println!("testing run_image {}", image_name);
         Command::new("sh")
             .arg("-c")
             .arg(image_name)
@@ -32,7 +31,10 @@ pub mod checks {
                 println!("Starting MySQL5.6");
                 run_image(String::from("docker-compose run --service-ports mysql56"));
             }
-            "stop" => run_image(String::from("docker-compose down")),
+            "stop" => {
+                println!("Running the halt command for all items");
+                run_image(String::from("docker-compose down"))
+            }
             _ => println!("It's nothing"),
         }
     }
